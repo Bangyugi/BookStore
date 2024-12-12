@@ -6,6 +6,7 @@ import com.group2.bookstore.service.OrderItemService;
 import com.group2.bookstore.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -25,14 +26,14 @@ public class OrderItemController {
 
     @Operation(summary = "Create Order Item", description = "Create Order Item API")
     @PostMapping()
-    public ResponseEntity<ApiResponse> createOrderItem(@RequestBody OrderItemRequest orderItemRequest) {
+    public ResponseEntity<ApiResponse> createOrderItem(@RequestBody @Valid OrderItemRequest orderItemRequest) {
         ApiResponse apiResponse = ApiResponse.success(orderItemService.createOrderItem(orderItemRequest));
         return  new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
     }
 
     @Operation(summary = "Update Order Item", description = "Update Order Item API")
     @PutMapping("/{orderItemId}")
-    public ResponseEntity<ApiResponse> updateOrderItem(@PathVariable("orderItemId") Long orderItemId, @RequestBody OrderItemRequest orderItemRequest) {
+    public ResponseEntity<ApiResponse> updateOrderItem(@PathVariable("orderItemId") Long orderItemId, @RequestBody @Valid OrderItemRequest orderItemRequest) {
         ApiResponse apiResponse = ApiResponse.success(orderItemService.updateOrderItem(orderItemId, orderItemRequest));
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
@@ -48,6 +49,14 @@ public class OrderItemController {
     @GetMapping("/{orderItemId}")
     public ResponseEntity<ApiResponse> getOrderItemById(@PathVariable("orderItemId") Long orderItemId) {
         ApiResponse apiResponse = ApiResponse.success(orderItemService.getOrderItemById(orderItemId));
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Update Order Item Status", description = "Update Order Item Status API")
+    @PutMapping("/update-status/{orderItemId}")
+    public ResponseEntity<ApiResponse> updateOrderItemStatus(@PathVariable("orderItemId") Long orderItemId) {
+        System.out.println("hello");
+        ApiResponse apiResponse = ApiResponse.success(orderItemService.updateOrderItemStatus(orderItemId));
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 

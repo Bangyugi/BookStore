@@ -5,6 +5,7 @@ import com.group2.bookstore.dto.response.ApiResponse;
 import com.group2.bookstore.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +23,7 @@ public class BookController {
 
     @Operation(summary = "Create Book", description = "Create Book API")
     @PostMapping()
-    public ResponseEntity<ApiResponse> createBook(@RequestBody BookRequest bookRequest) {
+    public ResponseEntity<ApiResponse> createBook(@RequestBody @Valid BookRequest bookRequest) {
         ApiResponse apiResponse = ApiResponse.success(bookService.createBook(bookRequest));
         return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
     }
@@ -88,7 +89,7 @@ public class BookController {
 
     @Operation(summary = "Update Book", description = "Update Book API")
     @PutMapping("/{bookId}")
-    public ResponseEntity<ApiResponse> updateBook(@PathVariable("bookId") Long bookId, @RequestBody BookRequest bookRequest) {
+    public ResponseEntity<ApiResponse> updateBook(@PathVariable("bookId") Long bookId, @RequestBody @Valid  BookRequest bookRequest) {
         ApiResponse apiResponse = ApiResponse.success(bookService.updateBook(bookId, bookRequest));
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }

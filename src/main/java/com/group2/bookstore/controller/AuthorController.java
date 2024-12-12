@@ -28,7 +28,7 @@ public class AuthorController {
 
     @Operation(summary = "Create Author", description = "Create Author API")
     @PostMapping()
-    public ResponseEntity<ApiResponse> createAuthor(@RequestBody AuthorRequest authorRequest) {
+    public ResponseEntity<ApiResponse> createAuthor(@RequestBody @Valid AuthorRequest authorRequest) {
         ApiResponse apiResponse = ApiResponse.success(authorService.createAuthor(authorRequest));
         return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
     }

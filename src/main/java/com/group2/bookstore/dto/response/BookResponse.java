@@ -1,4 +1,4 @@
-package com.group2.bookstore.dto.request;
+package com.group2.bookstore.dto.response;
 
 import com.group2.bookstore.entity.Author;
 import com.group2.bookstore.entity.Category;
@@ -13,12 +13,12 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookRequest {
+public class BookResponse {
     private Long bookId;
     private String bookTitle;
     private String bookDescription;
     private Long unitPrice;
     private Long boughtAmount;
-    private Set<Category> categories;
-    private Author author;
+    private Set<CategoryResponse> categories;
+    private AuthorResponse author;
 }

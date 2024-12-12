@@ -1,4 +1,4 @@
-package com.group2.bookstore.dto.request;
+package com.group2.bookstore.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthorRequest {
+public class AuthorResponse {
+    private String authorId;
     private String authorName;
 }
